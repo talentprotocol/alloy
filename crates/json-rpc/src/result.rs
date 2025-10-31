@@ -91,9 +91,6 @@ where
     };
 
     trace!(ty=%std::any::type_name::<T>(), %cleaned_json, "deserializing response");
-    if let Err(e) = std::fs::write("error-temp-debug.json", &cleaned_json) {
-        println!("Failed to write error JSON to file: {}", e);
-    }
 
     serde_json::from_str(&cleaned_json)
         .inspect(|response| trace!(?response, "deserialized response"))
